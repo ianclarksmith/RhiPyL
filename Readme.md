@@ -1,33 +1,23 @@
 # RhiPyL
 ## Rhino Python Loop (REPL) ##
 
----
+### Install/usage
 
-Something something about jamming rhinoceri and pythons through sockets so that one might yell commands from a netcat...
+    > cd ~/wherever/you/keep/scripts
+    > git clone https://github.com/ianclarksmith/RhiPyL.git
+    > open -a "Rhinoceros"
 
-At the moment this is just a server script which you can run by entering **RunPythonScript** in your Rhino command bar. It is hardcoded to port 49001 because I know nothing about sockets and heard that that particular port was more in my league.
+Enter RunPythonScript into the Rhino command bar, open server.py, then hit OK to run the server or cancel to abort. Then back to your shell...
 
-The Rhino interface will start playing with the beachball until you initiate a client. Netcat or something similar should do the trick.
+    > nc localhost 49001
 
-    nc localhost 49001
+That's it! You should receive a prompt to get going right away. When you're done, exit the server with `sys.exit()`.
 
-The original goal was to make it easier to test out a script I was working on from emacs, but since I know nothing about emacs and have barely even used python before, this is what happened.
+### Notes
 
-### Caveats
+After you hit OK to run the server, Rhino will freeze until you connect. Once you're connected though it should go back to normal and let you work as usual *while* connected from the shell– so you can walk around, create objects, etc. in whatever combination you want to!
 
-- It may not exit like you'd expect. Apparently getting IronPython to play nice with a simple `exit()` or `sys.exit()` is not the easiest thing in the world, and so until further notice the best way to shut it down is to:
-
-        import sys
-        sys.exit()
-...and then you can `Ctrl-D` out of your shell since it's not going to give you a prompt again anyway.
-- Assuming you've done that, you *may* have to actually quit and relaunch Rhino before opening a new session in order to connect to the socket.
-- You may notice that the socket is running in a new thread. That's because before, I was having all sorts of problems getting Rhino to respond (beachballin'). Maybe it's not necessary.
-
-### Todo
-- client.py
-- Learn python
-- Fix caveats
+Lastly, it should go without saying that you should always save and backup your work. Do not run *any* scripts, including this one, on critical data which you do not have backed up!
 
 ---
-
 Rhino OSX™ is a registered trademark of Robert McNeel & Associates.
